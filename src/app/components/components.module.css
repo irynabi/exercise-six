@@ -1,0 +1,12 @@
+.header{
+    align-items:center;
+    display:flex;
+    justify-content:flex-end;
+    padding: 10px 25px;
+}
+
+.HeaderNav{
+    margin: 0 8px;
+    padding: 3px;
+
+}
