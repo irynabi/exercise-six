@@ -1,10 +1,10 @@
 import styles from "./components.module.css"
 
-const LoginForm = () => {
+const CreateUserForm= () => {
     return (
         <div>
-            <h2>Login Form</h2>           
-            <form className={styles.Form}>
+            <h2>User Form</h2>
+            <form className={styles.CreateUserForm}> 
                 <label htmlFor="name"> Name </label>
                 <input type="text" name="name"/>
 
@@ -13,11 +13,11 @@ const LoginForm = () => {
 
                 <label htmlFor="password"> Password</label>
                 <input type="password" name="password"/>
-
-                <button type="submit"> Login </button>
+            
+                <button type="submit"> Create User </button>
             </form>
         </div>
     )
 }
 
-export default LoginForm;
+export default CreateUserForm;
