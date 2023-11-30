@@ -1,8 +1,10 @@
+import styles from "./components.module.css"
+
 const UserProfileCard = ({user}) => {
     return (
-        <div className={StyleSheet.UserProfile}>
-            <h2>Name:</h2>
-            <h2>Email:</h2>
+        <div className={styles.UserProfile}>
+            <h2>Name: {user?.name}</h2>
+            <p>Email:{user?.email}</p>
         </div>
     )
 }

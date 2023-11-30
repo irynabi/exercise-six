@@ -1,5 +1,5 @@
 const firebaseConfig = {
-    apiKey: `${process.env.API_KEY}`,
+    apiKey: "AIzaSyAuVycULRTjFgGlRltc9vLaTzWhPG0-5jo",
     authDomain: "exercise-six-34eb7.firebaseapp.com",
     projectId: "exercise-six-34eb7",
     storageBucket: "exercise-six-34eb7.appspot.com",

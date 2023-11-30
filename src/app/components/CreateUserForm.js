@@ -1,12 +1,10 @@
 import styles from "./components.module.css"
 
-const CreateUserForm= () => {
+const CreateUserForm= ( {createUser}) => {
     return (
         <div>
             <h2>User Form</h2>
-            <form className={styles.CreateUserForm}> 
-                <label htmlFor="name"> Name </label>
-                <input type="text" name="name"/>
+            <form className={styles.CreateUserForm} onSubmit={(e) => createUser(e)}> 
 
                 <label htmlFor="email"> Email </label>
                 <input type="email" name="email"/>

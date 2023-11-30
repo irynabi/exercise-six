@@ -1,10 +1,10 @@
 import styles from "./components.module.css"
 
-const LoginForm = () => {
+const LoginForm = ({loginUser}) => {
     return (
         <div>
             <h2>Login Form</h2>           
-            <form className={styles.Form}>
+            <form className={styles.Form} onSubmit={(e) => loginUser(e)}>
                 <label htmlFor="name"> Name </label>
                 <input type="text" name="name"/>
 
