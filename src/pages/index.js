@@ -1,8 +1,8 @@
 import UserProfileCard from "@/app/components/UserProfileCard";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function UserProfile( {isLoggedIn, user} ) {
+export default function UserProfile( {isLoggedIn, userInformation} ) {
     const router = useRouter();
 
     useEffect(() => {
@@ -11,8 +11,8 @@ export default function UserProfile( {isLoggedIn, user} ) {
 
     return (
         <main> 
-            <h1> Users Profile </h1>
-            <UserProfileCard user={user}/>
+            <h1> User Profile </h1>
+            <UserProfileCard user={userInformation}/>
         </main>
     );
 };

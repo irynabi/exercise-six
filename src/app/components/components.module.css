@@ -1,12 +1,28 @@
-.header{
+.Header{
     align-items:center;
     display:flex;
     justify-content:flex-end;
     padding: 10px 25px;
 }
 
-.HeaderNav{
+.HeaderNav a{
+    color: black;
     margin: 0 8px;
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: none;
     padding: 3px;
+}
 
+.Form{
+    display: flex;
+    flex-direction: column;
+    max-width: 375px;
+}
+
+.UserProfile{
+    border: 1px solid black;
+    border-radius: 4px;
+    max-width: 375px;
+    padding:20px;
 }

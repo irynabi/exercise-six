@@ -5,16 +5,13 @@ const LoginForm = ({loginUser}) => {
         <div>
             <h2>Login Form</h2>           
             <form className={styles.Form} onSubmit={(e) => loginUser(e)}>
-                <label htmlFor="name"> Name </label>
-                <input type="text" name="name"/>
-
                 <label htmlFor="email"> Email </label>
-                <input type="email" name="email"/>
+                <input type="email"  id="email" name="email"/>
 
                 <label htmlFor="password"> Password</label>
-                <input type="password" name="password"/>
+                <input type="password" id="password" name="password"/>
 
-                <button type="submit"> Login </button>
+                <button type="submit">Login</button>
             </form>
         </div>
     )

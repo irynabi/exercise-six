@@ -1,31 +1,82 @@
-import {createRef, useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import Header from "@/app/components/Header";
 import firebaseConfig from "@/app/components/firebaseConfig"
 
 export default function MyApp({ Component, pageProps}){
-    const [appInitialized, setAppIsInitialized] = useState(null);
+    const [appInitialized, setAppInitialized] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInformation, setUserInformation] = useState(null);
+    const [error,setError] = useState(null);
 
-    const createUser = useCallback((e) => {
-        
-    }, []);
 
-    const loginUser = useCallback((e) => {
+    const createUser = useCallback(
+        (e) => {
+            e.PreventDefault();
+            const email = e.currentTarget.email.value;
+            const password = e.currentTarget.password.value;
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user
+                    setIsLoggedIn(true);
+                    setUserInformation(user);
+                    setError(null);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.warn({error, errorCode, errorMessage});
+                    setError(errorMessage);
+                    });
+        }, [setError, setIsLoggedIn, setUserInformation]);
 
-    }, []);
 
-    const logoutUser = useCallback((e) => {
+    const loginUser = useCallback(
+        (e) => {
+            e.PreventDefault();
+            const email = e.currentTarget.email.value
+            const password = e.currentTarget.password.value
+            const auth = getAuth()
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user
+                    setIsLoggedIn(true);
+                    setUserInformation(user);
+                    setError(null);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.warn({error, errorCode, errorMessage});
+                    setError(errorMessage);
+                })
+    }, [setError, setIsLoggedIn, setUserInformation]);
 
-    }, []);
+
+    const logoutUser = useCallback(() => {
+        const auth = getAuth();
+        signOut(auth)
+            .then(() => {
+                setUserInformation(null);
+                setIsLoggedIn(false);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.warn({ error, errorCode, errorMessage});
+                setError(errorMessage);
+            });
+    }, [setError, signOut, setIsLoggedIn, setUserInformation]);
+
 
     useEffect(() => {
-        const app = initializeApp(firebaseConfig);
-        setAppIsInitialized(true);
-    }, [])
+        initializeApp(firebaseConfig);
+        setAppInitialized(true);
+    }, []);
+
 
     useEffect(() => {
         if (appInitialized) {
@@ -35,27 +86,26 @@ export default function MyApp({ Component, pageProps}){
                     setUserInformation(user);
                     setIsLoggedIn(true);
                 } else{
-                        setUserInformation(null);
-                        setIsLoggedIn(false);
-                    }
-                    setIsLoading(false);
-                });
-            }
+                    setUserInformation(null);
+                    setIsLoggedIn(false);
+                }
+                setIsLoading(false);
+            });
+        }
     }, [appInitialized]);
 
     if (isLoading) return null;
 
     return (
         <>
-        <Header />
+        <Header isLoggedIn={isLoggedIn} logoutUser={logoutUser} />
         <Component
-        {...pageProps}
-        createUser = {createUser}
-        loginUser = {loginUser}
-        logoutUser = {logoutUser}
-        isLoggedIn = {isLoggedIn}
-        userInformation = {userInformation}
+            {...pageProps}
+            createUser={createUser}
+            isLoggedIn={isLoggedIn}
+            loginUser={loginUser}
+            userInformation={userInformation}
         />
-    </>
-    )
-}
+        <p>{error}</p>
+        </>
+    )};
