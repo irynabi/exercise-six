@@ -9,12 +9,12 @@ export default function MyApp({ Component, pageProps}){
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInformation, setUserInformation] = useState(null);
-    const [error,setError] = useState(null);
+    const [error, setError] = useState(null);
 
 
     const createUser = useCallback(
         (e) => {
-            e.PreventDefault();
+            e.preventDefault();
             const email = e.currentTarget.email.value;
             const password = e.currentTarget.password.value;
             const auth = getAuth();
@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps}){
 
     const loginUser = useCallback(
         (e) => {
-            e.PreventDefault();
+            e.preventDefault();
             const email = e.currentTarget.email.value
             const password = e.currentTarget.password.value
             const auth = getAuth()

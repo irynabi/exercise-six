@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/app/components/LoginForm";
 
-export default function Login({ isLoggedIn, loginUser}) {
+export default function Login({ isLoggedIn, loginUser }) {
     const router = useRouter();
     useEffect(() => {
         if (isLoggedIn) router.push("/");
